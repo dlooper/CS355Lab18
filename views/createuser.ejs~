@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Create User</title>
+  <link href="/style.css" rel="stylesheet">  
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#user-submit').click(function () {
+                var payload = {
+                    username: $('#user-name').val(),
+                    password: $('#user-password').val()
+                };
+
+		console.log(payload);
+
+                $.ajax({
+                    url: "/user/create",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                        $('#output').html(data.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <% include header %>
+    <!--
+    <div id="container">
+    <div id="header">
+    <img src="http://i.imgur.com/n38qr82.png" alt="Twooter">
+    </div>
+
+    <br> -->
+    <div id="menu2"> <!-- style="margin-left:60px; background-color:#0099FF;height:100px;width:300px;float:left;">-->
+    <br><br><b style="margin-left:15px;">Please Enter a Username and Password:</b><br>
+    </div>
+
+    <div id="content"> <!-- style="margin-left:80px; background-color:#FFFFFF;height:250px;width:150px;float:left;">-->
+
+    Username: <input id="user-name" type="text" /> <br />
+    Password: <input id="user-password" type="password" /> <br />
+    <input id="user-submit" type="submit" />
+    <p id="output"></p>
+
+    </div>
+
+    <div id="footer"> <!-- style="background-color:#FFA500;clear:both;text-align:center;">-->
+    <a href="https://www.google.com/"> About Twooter</a> - Copyright © 2014 Twooter</div>
+
+    </div>
+
+  </body>
+</html>
